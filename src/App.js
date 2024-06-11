@@ -10,42 +10,35 @@ import Missing from './Missing';
 import { Link, Route, Router, Routes } from 'react-router-dom';
 import Post from './Post';
 import PostPageLayout from './PostPageLayout';
+import { useState } from 'react';
 
 
 
 function App() {
+const [search, setSearch] = useState('');
   
   return (
     <div className="App">
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/postpage'>PostPage</Link></li>
-
-      </ul>
+      <Header/>
+      <Nav
+        search={search}
+        setSearch={setSearch}
+      />
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/header' element={<Header/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/newpost' element={<NewPost/>}/>
-        <Route path='/*' element={<Missing/>}/>
-
-
-        {/* make postapge as nested */}
-        <Route path='/postpage' element={<PostPageLayout/>} >
-          <Route element={<PostPage/>}/>
-          <Route path=':id' element={<Post/>}/>
-          <Route path='newpost' element={<NewPost/>}/>
-        </Route>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/post" element={<PostPageLayout/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/new" element={<NewPost/>}/>
+        <Route path="/:postId" element={<Post/>}/>
+        <Route path="*" element={<Missing/>}/>
       </Routes>
-      {/* <Header/>
-      <Nav/>
+      
       <Home/>
       <NewPost/>
       <PostPage/>
       <About/>
       <Missing/>
-      <Footer/> */}
+      <Footer/>
     </div>
   );
 }
