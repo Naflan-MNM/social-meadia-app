@@ -16,6 +16,49 @@ import { useState } from 'react';
 
 function App() {
 const [search, setSearch] = useState('');
+const [posts, setPosts] = useState([
+  {
+    id: 1,
+    title: 'Hello World',
+    datetime: 'july 1, 2021 11:25:14 AM',
+    body: 'This is a test post',
+  },
+  {
+    id: 2,
+    title: 'My first post',
+    datetime: 'july 25, 2021 12:05:14 PM',
+    body: 'Made a very cool post',
+  },
+  {
+    id: 3,
+    title: 'my second post',
+    datetime: 'june 1, 2022 08:25:14 AM',
+    body: 'Our Edu-Hub webapplication is awesome',
+  },
+  {
+    id: 4,
+    title: 'my third post',
+    datetime: 'june 25, 2022 11:25:14 AM',
+    body: 'ETH 2.0 will beat Bitcoin',
+  }
+] || []);
+const [currentPost, setCurrentPost] = useState([]);
+/* new posthandler */
+
+const [postTitle, setPostTitle] = useState('');
+const [postBody, setPostBody] = useState('');
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const newPost = {
+    id: posts.length + 1,
+    title: postTitle,
+    datetime: new Date().toLocaleString(),
+    body: postBody,
+  };
+  setPosts([...posts, newPost]);
+  setPostTitle('');
+  setPostBody('');
+}
   
   return (
     <div className="App">
@@ -24,17 +67,26 @@ const [search, setSearch] = useState('');
         search={search}
         setSearch={setSearch}
       />
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/post" element={<PostPageLayout/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/new" element={<NewPost/>}/>
         <Route path="/:postId" element={<Post/>}/>
         <Route path="*" element={<Missing/>}/>
-      </Routes>
-      
-      <Home/>
-      <NewPost/>
+      </Routes> */}
+      <Home 
+        posts={posts}
+        setCurrentPost={setCurrentPost}
+        currentPost={currentPost}
+      />
+      <NewPost
+        handleSubmit={handleSubmit} 
+        postTitle={postTitle}
+        setPostTitle={setPostTitle}
+        postBody={postBody}
+        setPostBody={setPostBody}
+      />
       <PostPage/>
       <About/>
       <Missing/>

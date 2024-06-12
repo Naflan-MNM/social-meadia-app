@@ -1,8 +1,20 @@
 import React from 'react'
+import Post from './Post'
 
-const Home = () => {
+const Home = ({ posts, setCurrentPost, currentPost }) => {  
   return (
-    <div>Home</div>
+    <main className="Home">
+      {posts.length ? 
+      posts.map((post) => (
+        <Post 
+          key={post.id} 
+          post={post} 
+          setCurrentPost={setCurrentPost} 
+          currentPost={currentPost}
+        />
+      )) : <p style={{color: '#888888', textAlign: 'center', marginTop: '2rem'}}>No posts yet</p>}
+
+    </main>
   )
 }
 

@@ -1,10 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-const Post = () => {
+const Post = ({ post, setCurrentPost, currentPost }) => {
     const {id} = useParams()
   return (
-    <div><h2>Post {id}</h2></div>
+    <article className="post">
+      <h1>{post.title}</h1>
+      <p className='postDate'>{post.datetime}</p>
+      <p className='postBody'>{(post.body).length <=25 ? post.body : `${post.body.substring(0,25)}...`}</p>
+    </article>
   )
 }
 
