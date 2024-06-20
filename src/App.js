@@ -11,11 +11,14 @@ import { Link, Route, Router, Routes } from 'react-router-dom';
 import Post from './Post';
 import PostPageLayout from './PostPageLayout';
 import { useState } from 'react';
-
+import {format} from 'date-fns';
+import HomeWithFooter from './HomeWithFooter ';
 
 
 function App() {
+  /* this is for search box */ 
 const [search, setSearch] = useState('');
+/* this is for posts */
 const [posts, setPosts] = useState([
   {
     id: 1,
@@ -42,17 +45,18 @@ const [posts, setPosts] = useState([
     body: 'ETH 2.0 will beat Bitcoin',
   }
 ] || []);
-const [currentPost, setCurrentPost] = useState([]);
-/* new posthandler */
 
+/* new posthandler */
+/* get the text as title and body */
 const [postTitle, setPostTitle] = useState('');
 const [postBody, setPostBody] = useState('');
+
 const handleSubmit = (e) => {
   e.preventDefault();
   const newPost = {
     id: posts.length + 1,
     title: postTitle,
-    datetime: new Date().toLocaleString(),
+    datetime: format(new Date().toLocaleString(),'MMMM dd, yyyy pp'),
     body: postBody,
   };
   setPosts([...posts, newPost]);
@@ -67,30 +71,37 @@ const handleSubmit = (e) => {
         search={search}
         setSearch={setSearch}
       />
-      {/* <Routes>
-        <Route path="/" element={<Home/>}/>
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <HomeWithFooter
+              posts={posts}
+            />
+          }
+        />
         <Route path="/post" element={<PostPageLayout/>}/>
         <Route path="/about" element={<About/>}/>
-        <Route path="/new" element={<NewPost/>}/>
+        <Route 
+          path="/new" 
+          element={
+            <NewPost
+              handleSubmit={handleSubmit} 
+              postTitle={postTitle}
+              setPostTitle={setPostTitle}
+              postBody={postBody}
+              setPostBody={setPostBody}
+            />
+          }
+        />
         <Route path="/:postId" element={<Post/>}/>
         <Route path="*" element={<Missing/>}/>
-      </Routes> */}
-      <Home 
-        posts={posts}
-        setCurrentPost={setCurrentPost}
-        currentPost={currentPost}
-      />
-      <NewPost
-        handleSubmit={handleSubmit} 
-        postTitle={postTitle}
-        setPostTitle={setPostTitle}
-        postBody={postBody}
-        setPostBody={setPostBody}
-      />
-      <PostPage/>
-      <About/>
-      <Missing/>
-      <Footer/>
+        <Route 
+          path='postpage'
+          element={<PostPage/>}
+        /> 
+      </Routes> 
+      
     </div>
   );
 }

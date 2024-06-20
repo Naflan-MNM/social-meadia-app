@@ -1,7 +1,7 @@
 import React from 'react'
 import Post from './Post'
 
-const Home = ({ posts, setCurrentPost, currentPost }) => {  
+const Home = ({ posts }) => {  
   return (
     <main className="Home">
       {posts.length ? 
@@ -9,11 +9,8 @@ const Home = ({ posts, setCurrentPost, currentPost }) => {
         <Post 
           key={post.id} 
           post={post} 
-          setCurrentPost={setCurrentPost} 
-          currentPost={currentPost}
         />
       )) : <p style={{color: '#888888', textAlign: 'center', marginTop: '2rem'}}>No posts yet</p>}
-
     </main>
   )
 }

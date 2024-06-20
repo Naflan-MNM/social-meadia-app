@@ -2,7 +2,12 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div><h2>About</h2></div>
+    <main className='About'>
+      <h2>About us</h2>
+      <p style={{marginTop:'1rem'}}>
+        Hi, I am naflan. this application is e commarce application.
+      </p>
+    </main>
   )
 }
 
