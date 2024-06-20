@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
+/* import { useParams } from 'react-router-dom' */
 const PostPageLayout = () => {
-  const {id} = useParams()
+  /* const {id} = useParams() */
   return (
     <>
       <Link to='/postpage/1'><h4>post 1</h4></Link>
