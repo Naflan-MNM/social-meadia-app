@@ -80,10 +80,9 @@ const handleSubmit = (e) => {
             />
           }
         />
-        <Route path="/post" element={<PostPageLayout/>}/>
         <Route path="/about" element={<About/>}/>
         <Route 
-          path="/new" 
+          path="/post" 
           element={
             <NewPost
               handleSubmit={handleSubmit} 
